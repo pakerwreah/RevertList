@@ -1,34 +1,27 @@
 # coding=utf-8
 """
- * Nao tem como criar classes internas no Python,
- * entao infelizmente a classe Node fica publica
- *
- * Tambem nao existe modificador de acessibilidade,
- * entao tudo eh publico... varzea total! ihul \o/
- *
- * ¯\_(ツ)_/¯
- *
+ * Nao existe modificador de acessibilidade,
+ * entao tudo eh publico... varzea total! ihul
 """
 
 
-class Node:
-    # variaveis declaradas diretamente na classe (aqui) sao membros da classe e nao do objeto
-    # normalmente em python nao se declara nada, eh tudo no pelo, go horse style (pensou, nao eh go horse)
-
-    def __init__(self, content):
-        # aqui no construtor eh que se "declara" a variavel ja atribuindo valor
-        # e usando o self, que representa o objeto instanciado
-        self.content = content
-        self.next = None
-
-
 class LinkedList:
+    class Node:
+        # variaveis declaradas diretamente na classe (aqui) sao membros da classe e nao do objeto
+        # normalmente em python nao se declara nada, eh tudo no pelo, go horse style (pensou, nao eh go horse)
+
+        def __init__(self, content):
+            # aqui no construtor eh que se "declara" a variavel ja atribuindo valor
+            # e usando o self, que representa o objeto instanciado
+            self.content = content
+            self.next = None
+
     def __init__(self):
         self.count = 0
         self.head = None
 
     def add(self, item):
-        node = Node(item)
+        node = self.Node(item)
         if self.head is None:
             self.head = node
         else:
@@ -57,7 +50,7 @@ class LinkedList:
     def item(self, index):
         p = self.head
 
-        for i in xrange(0, index):
+        for _ in xrange(0, index):
             p = p.next
 
         return p.content
@@ -68,7 +61,7 @@ class LinkedList:
     def __str__(self):
         buf = ""
         for i in xrange(0, self.size()):
-            buf += str(self.item(i)) + " "
+            buf += "%s " % self.item(i)
 
         return buf
 
@@ -78,23 +71,23 @@ class LinkedList:
 # diz a lenda que xrange consome menos memoria... coisas de python ¯\_(ツ)_/¯
 # Obs2.: o segundo parametro da funcao range/xrange eh exclusivo (inicio -> fim-1)
 
-# ----------- MAIN ---------- #
+if __name__ == '__main__':
 
-llist = LinkedList()
+    llist = LinkedList()
 
-for i in xrange(1, 11):
-    llist.add(i)
+    for i in xrange(1, 11):
+        llist.add(i)
 
-print(llist)
-llist.revert()
-print(llist)
+    print(llist)
+    llist.revert()
+    print(llist)
 
-str_list = LinkedList()
-for i in xrange(1, 6):
-    str_list.add("str" + str(i))
+    str_list = LinkedList()
+    for i in xrange(1, 6):
+        str_list.add("str" + str(i))
 
-print(str_list)
-str_list.revert()
-print(str_list)
+    print(str_list)
+    str_list.revert()
+    print(str_list)
 
-print("")
+    print("")
